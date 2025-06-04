@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; // material - ignore as this file will be dropped
 import 'package:flutter/services.dart';
 
 import 'app_state_manager.dart';

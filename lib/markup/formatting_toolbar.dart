@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart'; // material import 'package:fluent_ui/fluent_ui.dart';
 
 import 'app_state.dart';
 import 'app_state_manager.dart';
@@ -18,28 +18,40 @@ class FormattingToolbar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ToggleButtons(
-            borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-            isSelected: [
-              manager.appState.toggleButtonsState.contains(
-                ToggleButtonsState.bold,
-              ),
-              manager.appState.toggleButtonsState.contains(
-                ToggleButtonsState.italic,
-              ),
-              manager.appState.toggleButtonsState.contains(
-                ToggleButtonsState.underline,
-              ),
-            ],
-            onPressed:
-                (index) => AppStateWidget.of(
+          ToggleButton(
+            child: const Text('Emphasis'),
+            checked: manager.appState.toggleButtonsState.contains(
+              ToggleButtonsState.bold,
+            ),
+            onChanged:
+                (v) => AppStateWidget.of(
                   context,
-                ).updateToggleButtonsStateOnButtonPressed(index),
-            children: const [
-              Icon(Icons.format_bold),
-              Icon(Icons.format_italic),
-              Icon(Icons.format_underline),
-            ],
+                ).updateToggleButtonsStateOnButtonPressed(0),
+          ),
+          ToggleButton(
+            child: const Text('Source'),
+            checked: manager.appState.toggleButtonsState.contains(
+              ToggleButtonsState.italic,
+            ),
+            onChanged:
+                (v) => AppStateWidget.of(
+                  context,
+                ).updateToggleButtonsStateOnButtonPressed(1),
+          ),
+          ToggleButton(
+            child: const Text('Link'),
+            checked: manager.appState.toggleButtonsState.contains(
+              ToggleButtonsState.underline,
+            ),
+            onChanged:
+                (v) => AppStateWidget.of(
+                  context,
+                ).updateToggleButtonsStateOnButtonPressed(2),
+          ),
+          ToggleButton(
+            child: const Text("List"),
+            checked: false,
+            onChanged: (v) => {},
           ),
         ],
       ),

@@ -15,7 +15,22 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         accentColor: Colors.blue,
       ),
-      home: Markup(),
+      home: Contents(),
+    );
+  }
+}
+
+class Contents extends StatelessWidget {
+  const Contents({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: FluentTheme.of(context).micaBackgroundColor,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(child: Markup()),
+      ),
     );
   }
 }

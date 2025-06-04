@@ -40,29 +40,21 @@ class _MarkupWidgetState extends State<MarkupWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: FluentTheme.of(context).micaBackgroundColor,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Column(
-            children: [
-              const FormattingToolbar(),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 35.0),
-                  child: BasicTextField(
-                    controller: _replacementTextEditingController,
-                    style: const TextStyle(fontSize: 18.0, color: Colors.black),
-                    focusNode: _focusNode,
-                  ),
-                ),
-              ),
-              const Expanded(child: TextEditingDeltaHistoryView()),
-            ],
+    return Column(
+      children: [
+        const FormattingToolbar(),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35.0),
+            child: BasicTextField(
+              controller: _replacementTextEditingController,
+              style: const TextStyle(fontSize: 18.0, color: Colors.black),
+              focusNode: _focusNode,
+            ),
           ),
         ),
-      ),
+        const Expanded(child: TextEditingDeltaHistoryView()),
+      ],
     );
   }
 }

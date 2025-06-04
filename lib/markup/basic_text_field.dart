@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show desktopTextSelectionHandleControls; // edit
+import 'package:fluent_ui/fluent_ui.dart'; // edit
 import 'package:flutter/rendering.dart';
 
 import 'basic_text_input_client.dart';
@@ -123,29 +124,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
 
   @override
   Widget build(BuildContext context) {
-    switch (Theme.of(this.context).platform) {
-      // ignore: todo
-      // TODO(Renzo-Olivares): Remove use of deprecated members once
-      // TextSelectionControls.buildToolbar has been deleted.
-      // See https://github.com/flutter/flutter/pull/124611 and
-      // https://github.com/flutter/flutter/pull/124262 for more details.
-      case TargetPlatform.iOS:
-        // ignore: deprecated_member_use
-        _textSelectionControls = cupertinoTextSelectionHandleControls;
-      case TargetPlatform.macOS:
-        // ignore: deprecated_member_use
-        _textSelectionControls = cupertinoDesktopTextSelectionHandleControls;
-      case TargetPlatform.android:
-      case TargetPlatform.fuchsia:
-        // ignore: deprecated_member_use
-        _textSelectionControls = materialTextSelectionHandleControls;
-      case TargetPlatform.linux:
-        // ignore: deprecated_member_use
-        _textSelectionControls = desktopTextSelectionHandleControls;
-      case TargetPlatform.windows:
-        // ignore: deprecated_member_use
-        _textSelectionControls = desktopTextSelectionHandleControls;
-    }
+    _textSelectionControls = desktopTextSelectionHandleControls;
 
     return TextFieldTapRegion(
       child: GestureDetector(
@@ -170,25 +149,13 @@ class _BasicTextFieldState extends State<BasicTextField> {
           _renderEditable.selectPosition(cause: SelectionChangedCause.tap);
         },
         onLongPressMoveUpdate: (longPressMoveUpdateDetails) {
-          switch (Theme.of(this.context).platform) {
-            case TargetPlatform.iOS:
-            case TargetPlatform.macOS:
-              _renderEditable.selectPositionAt(
-                from: longPressMoveUpdateDetails.globalPosition,
-                cause: SelectionChangedCause.longPress,
-              );
-            case TargetPlatform.android:
-            case TargetPlatform.fuchsia:
-            case TargetPlatform.linux:
-            case TargetPlatform.windows:
-              _renderEditable.selectWordsInRange(
-                from:
-                    longPressMoveUpdateDetails.globalPosition -
-                    longPressMoveUpdateDetails.offsetFromOrigin,
-                to: longPressMoveUpdateDetails.globalPosition,
-                cause: SelectionChangedCause.longPress,
-              );
-          }
+          _renderEditable.selectWordsInRange(
+            from:
+                longPressMoveUpdateDetails.globalPosition -
+                longPressMoveUpdateDetails.offsetFromOrigin,
+            to: longPressMoveUpdateDetails.globalPosition,
+            cause: SelectionChangedCause.longPress,
+          );
         },
         onLongPressEnd:
             (longPressEndDetails) => _textInputClient!.showToolbar(),

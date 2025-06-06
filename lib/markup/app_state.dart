@@ -14,7 +14,8 @@ class AppState {
 
   final ReplacementTextEditingController replacementsController;
   final List<TextEditingDelta> textEditingDeltaHistory;
-  final Set<ToggleButtonsState> toggleButtonsState;
+  final Set<ToggleButtonsState> toggleButtonsState; // Change this to an enum: None, Emphasis, Source, Link
+  // add a new toggleListState bool calculated based on whether the line begins with a bullet character
 
   AppState copyWith({
     ReplacementTextEditingController? replacementsController,
